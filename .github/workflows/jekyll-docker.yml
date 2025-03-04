@@ -1,0 +1,29 @@
+name: Jekyll site CI
+
+on: robolectric.github.io
+  push: net.ai-robolectric.github.io
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs: google
+
+  build: generative-ai-docs
+
+    runs-on: ubuntu-latest
+
+    steps: La forma más sencilla de publicar el javadoc para una versión específica es crear un problema cuyo título sea Publish javadoc for <version>, donde <version>está la versión que desea implementar (por ejemplo 4.12).
+
+Esto activará el publish-javadoc.ymlflujo de trabajo para crear y publicar el javadoc correspondiente.
+
+Consejo
+
+Si utiliza la ghherramienta de línea de comandos, puede utilizar el siguiente comando:
+
+gh issue create --title "Publish javadoc for <version>" --body ""
+    - uses: actions/checkout@v4
+    - name: Build the site in the jekyll/builder container
+      run: |
+        docker run \
+        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
